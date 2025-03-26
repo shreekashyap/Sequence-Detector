@@ -1,0 +1,48 @@
+module sequence_detector(x, clk, rst, z); 
+    input x,clk,rst; 
+    output  reg z; 
+   
+parameter s0=2'b00; 
+parameter s1=2'b01; 
+parameter s2=2'b10; 
+reg[1:0]pst,nst; 
+ 
+ always @(posedge clk,posedge rst) 
+ begin 
+  if(rst) 
+  pst<=s0; 
+  else 
+  pst<=nst; 
+  end 
+   
+ always @(pst or x) 
+ begin 
+  case(pst) 
+   s0: if(x) 
+   begin 
+    z=1'b0; 
+    nst=s1; end 
+   else begin 
+    z=1'b0; 
+    nst=s0; end 
+     
+   s0: if(x) 
+   begin 
+    z=1'b0; 
+    nst=s1; end 
+   else begin 
+    z=1'b0; 
+    nst=s2; end 
+     
+   s0: if(x) 
+   begin 
+    z=1'b0; 
+    nst=s1; end 
+   else begin 
+    z=1'b0; 
+    nst=s0; end 
+ 
+    endcase
+ end 
+     
+   endmodule 
